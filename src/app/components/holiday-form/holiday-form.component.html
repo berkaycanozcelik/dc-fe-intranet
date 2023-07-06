@@ -19,15 +19,86 @@
       required
     />
   </div>
+
   <div class="form-group">
-    <label for="reason">Reason</label>
+    <label for="remaining-days">Restliche Urlaubstage</label>
+    <input
+      type="number"
+      id="remaining-days"
+      name="remaining-days"
+      class="form-control"
+      required
+    />
+  </div>
+  <div class="form-group">
+    <label for="vacation-workdays">Werkstage im Urlaub</label>
+    <input
+      type="number"
+      id="vacation-workdays"
+      name="vacation-workdays"
+      class="form-control"
+      required
+    />
+  </div>
+  <div class="form-group">
+    <label for="reason">Notiz</label>
     <textarea
-      id="reason"
-      name="reason"
+      id="notiz"
+      name="notiz"
       class="form-control"
       rows="4"
       required
     ></textarea>
+  </div>
+  <div class="form-group">
+    <div class="flex-group">
+      <div class="checkbox">
+        <input
+          type="checkbox"
+          id="confirmation-1"
+          name="confirmation-1"
+          required
+        />
+      </div>
+      <div class="label">
+        <label for="confirmation-1"
+          >Ich bestätige, dass ich mit meine Abwesenheit mit meinen
+          Kunden/Projektleitern abgestimmt habe</label
+        >
+      </div>
+    </div>
+    <div class="flex-group">
+      <div class="checkbox">
+        <input
+          type="checkbox"
+          id="confirmation-2"
+          name="confirmation-2"
+          required
+        />
+      </div>
+      <div class="label">
+        <label for="confirmation-2"
+          >Die Angabe der verbrauchten Werktage erfolgt in
+          Eigenverantwortung</label
+        >
+      </div>
+    </div>
+
+    <div>
+      <div style="margin-right: 10px"></div>
+    </div>
+    <div class="flex-group"></div>
+  </div>
+
+  <div class="form-group">
+    <label for="replacement">Vertretung</label>
+    <select id="replacement" name="replacement" class="form-control" required>
+      <option value="">Select a replacement</option>
+      <option value="John">John</option>
+      <option value="Sarah">Sarah</option>
+      <option value="Michael">Michael</option>
+      <option value="Emily">Emily</option>
+    </select>
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
