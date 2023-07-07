@@ -8,8 +8,8 @@ import { Holiday } from '../../types/holiday';
 @Component({
   selector: 'app-holiday',
   standalone: true,
-  templateUrl: './holiday.component.html',
-  styleUrls: ['./holiday.component.scss'],
+  templateUrl: './holiday-page.component.html',
+  styleUrls: ['./holiday-page.component.scss'],
   imports: [
     CommonModule,
     MatTabsModule,
