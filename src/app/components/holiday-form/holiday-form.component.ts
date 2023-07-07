@@ -8,7 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule } from '@angular/forms';
-import { Holiday } from '../../types/holiday';
+import { Holiday } from '../../models/holiday';
 
 @Component({
   selector: 'app-holiday-form',

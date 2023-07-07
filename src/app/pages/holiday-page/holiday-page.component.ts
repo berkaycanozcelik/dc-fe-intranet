@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatTabsModule } from '@angular/material/tabs';
 import { HolidayFormComponent } from 'src/app/components/holiday-form/holiday-form.component';
 import HolidayTableComponent from '../../components/holiday-table/holiday-table.component';
-import { Holiday } from '../../types/holiday';
+import { Holiday } from '../../models/holiday';
 
 @Component({
   selector: 'app-holiday',
