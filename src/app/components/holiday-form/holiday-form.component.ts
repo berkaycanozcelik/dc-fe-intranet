@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   MatCalendarCellClassFunction,
@@ -7,6 +7,8 @@ import {
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
+import { FormsModule } from '@angular/forms';
+import { Holiday } from '../../types/holiday';
 
 @Component({
   selector: 'app-holiday-form',
@@ -17,6 +19,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    FormsModule,
   ],
   templateUrl: './holiday-form.component.html',
   styleUrls: ['./holiday-form.component.scss'],
@@ -33,4 +36,48 @@ export class HolidayFormComponent {
 
     return '';
   };
+
+  @Output() holidaysChange = new EventEmitter<Holiday[]>();
+
+  startDate: string = '';
+  endDate: string = '';
+  remainingDays: number = 0;
+  vacationWorkdays: number = 0;
+  reason: string = '';
+  confirmation1: boolean = false;
+  confirmation2: boolean = false;
+  replacement: string = '';
+  status: string = 'Pending';
+  holidays: Holiday[] = [];
+
+  submitForm() {
+    const holiday: Holiday = {
+      startDate: this.startDate,
+      endDate: this.endDate,
+      remainingDays: this.remainingDays,
+      vacationWorkdays: this.vacationWorkdays,
+      reason: this.reason,
+      confirmation1: this.confirmation1,
+      confirmation2: this.confirmation2,
+      replacement: this.replacement,
+      status: this.status,
+    };
+
+    this.holidays.push(holiday);
+    this.resetForm();
+    console.log('Form submitted. Holidays:', this.holidays);
+    this.holidaysChange.emit(this.holidays);
+  }
+
+  resetForm() {
+    this.startDate = '';
+    this.endDate = '';
+    this.remainingDays = 0;
+    this.vacationWorkdays = 0;
+    this.reason = '';
+    this.confirmation1 = false;
+    this.confirmation2 = false;
+    this.replacement = '';
+    this.status = 'Pending';
+  }
 }

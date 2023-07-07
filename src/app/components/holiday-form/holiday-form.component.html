@@ -1,98 +1,45 @@
-<form class="holiday-request-form pt-5">
+<form class="holiday-request-form pt-5" (ngSubmit)="submitForm()">
   <div class="form-group">
     <label for="start-date">Start Date</label>
-    <input
-      type="date"
-      id="start-date"
-      name="start-date"
-      class="form-control"
-      required
-    />
+    <input type="date" id="start-date" name="start-date" class="form-control" required [(ngModel)]="startDate">
   </div>
   <div class="form-group">
     <label for="end-date">End Date</label>
-    <input
-      type="date"
-      id="end-date"
-      name="end-date"
-      class="form-control"
-      required
-    />
+    <input type="date" id="end-date" name="end-date" class="form-control" required [(ngModel)]="endDate">
   </div>
-
   <div class="form-group">
     <label for="remaining-days">Restliche Urlaubstage</label>
-    <input
-      type="number"
-      id="remaining-days"
-      name="remaining-days"
-      class="form-control"
-      required
-    />
+    <input type="number" id="remaining-days" name="remaining-days" class="form-control" required [(ngModel)]="remainingDays">
   </div>
   <div class="form-group">
     <label for="vacation-workdays">Werkstage im Urlaub</label>
-    <input
-      type="number"
-      id="vacation-workdays"
-      name="vacation-workdays"
-      class="form-control"
-      required
-    />
+    <input type="number" id="vacation-workdays" name="vacation-workdays" class="form-control" required [(ngModel)]="vacationWorkdays">
   </div>
   <div class="form-group">
     <label for="reason">Notiz</label>
-    <textarea
-      id="notiz"
-      name="notiz"
-      class="form-control"
-      rows="4"
-      required
-    ></textarea>
+    <textarea id="notiz" name="notiz" class="form-control" rows="4" required [(ngModel)]="reason"></textarea>
   </div>
   <div class="form-group">
     <div class="flex-group">
       <div class="checkbox">
-        <input
-          type="checkbox"
-          id="confirmation-1"
-          name="confirmation-1"
-          required
-        />
+        <input type="checkbox" id="confirmation-1" name="confirmation-1" required [(ngModel)]="confirmation1">
       </div>
       <div class="label">
-        <label for="confirmation-1"
-          >Ich bestätige, dass ich mit meine Abwesenheit mit meinen
-          Kunden/Projektleitern abgestimmt habe</label
-        >
+        <label for="confirmation-1">Ich bestätige, dass ich mit meine Abwesenheit mit meinen Kunden/Projektleitern abgestimmt habe</label>
       </div>
     </div>
     <div class="flex-group">
       <div class="checkbox">
-        <input
-          type="checkbox"
-          id="confirmation-2"
-          name="confirmation-2"
-          required
-        />
+        <input type="checkbox" id="confirmation-2" name="confirmation-2" required [(ngModel)]="confirmation2">
       </div>
       <div class="label">
-        <label for="confirmation-2"
-          >Die Angabe der verbrauchten Werktage erfolgt in
-          Eigenverantwortung</label
-        >
+        <label for="confirmation-2">Die Angabe der verbrauchten Werktage erfolgt in Eigenverantwortung</label>
       </div>
     </div>
-
-    <div>
-      <div style="margin-right: 10px"></div>
-    </div>
-    <div class="flex-group"></div>
   </div>
-
   <div class="form-group">
     <label for="replacement">Vertretung</label>
-    <select id="replacement" name="replacement" class="form-control" required>
+    <select id="replacement" name="replacement" class="form-control" required [(ngModel)]="replacement">
       <option value="">Select a replacement</option>
       <option value="John">John</option>
       <option value="Sarah">Sarah</option>
@@ -101,8 +48,6 @@
     </select>
   </div>
   <div>
-    <button type="submit" class="btn btn-primary" style="float: right">
-      Submit
-    </button>
+    <button type="submit" class="btn btn-primary" style="float: right">Submit</button>
   </div>
 </form>
