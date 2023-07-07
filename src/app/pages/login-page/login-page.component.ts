@@ -6,9 +6,7 @@ import { LoginFormComponent } from 'src/app/components/login-form/login-form.com
   selector: 'app-login',
   standalone: true,
   imports: [CommonModule, LoginFormComponent],
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  templateUrl: './login-page.component.html',
+  styleUrls: ['./login-page.component.scss'],
 })
-export class LoginComponent {
-
-}
+export class LoginComponent {}
