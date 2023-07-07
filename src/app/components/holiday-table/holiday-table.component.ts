@@ -1,7 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatChipsModule } from '@angular/material/chips';
+import { Holiday } from '../../types/holiday';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatButtonModule } from '@angular/material/button';
 
 export interface PeriodicElement {
   name: string;
@@ -10,20 +14,22 @@ export interface PeriodicElement {
   symbol: string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  { position: 1, name: 'Pfingsten', weight: 3, symbol: 'Accepted' },
-  { position: 2, name: 'Silvester', weight: 2, symbol: 'Accepted' },
-  { position: 3, name: 'Ostern', weight: 6, symbol: 'Accepted' },
-];
-
 @Component({
   selector: 'app-holiday-table',
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatChipsModule],
+  imports: [
+    CommonModule,
+    MatTableModule,
+    MatChipsModule,
+    MatButtonModule,
+    MatDividerModule,
+    MatIconModule,
+  ],
   templateUrl: './holiday-table.component.html',
   styleUrls: ['./holiday-table.component.scss'],
 })
-export class HolidayTableComponent {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
+export default class HolidayTableComponent {
+  @Input() holidays: Holiday[] = [];
+
+  dataSource = this.holidays;
 }
