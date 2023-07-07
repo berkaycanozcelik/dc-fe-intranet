@@ -5,8 +5,8 @@ import { CommonModule } from '@angular/common';
   selector: 'app-landing',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './landing.component.html',
-  styleUrls: ['./landing.component.scss']
+  templateUrl: './landing-page.component.html',
+  styleUrls: ['./landing-page.component.scss']
 })
 export class LandingComponent {
 
