@@ -5,9 +5,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-profile',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  templateUrl: './profile-page.component.html',
+  styleUrls: ['./profile-page.component.scss'],
 })
-export class ProfileComponent {
-
-}
+export class ProfileComponent {}
