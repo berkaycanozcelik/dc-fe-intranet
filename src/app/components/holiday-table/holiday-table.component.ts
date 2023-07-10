@@ -6,6 +6,8 @@ import { Holiday } from '../../models/holiday';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
+import { HolidayService } from 'src/app/services/holiday/holiday.service';
+import { Observable } from 'rxjs';
 
 export interface PeriodicElement {
   name: string;
@@ -28,8 +30,12 @@ export interface PeriodicElement {
   templateUrl: './holiday-table.component.html',
   styleUrls: ['./holiday-table.component.scss'],
 })
-export default class HolidayTableComponent {
-  @Input() holidays: Holiday[] = [];
+export default class HolidayTableComponent implements OnInit {
+  holidays$: Observable<Holiday[]> = new Observable();
 
-  dataSource = this.holidays;
+  constructor(private holidayService: HolidayService) {}
+
+  ngOnInit(): void {
+    this.holidays$ = this.holidayService.getHolidays();
+  }
 }

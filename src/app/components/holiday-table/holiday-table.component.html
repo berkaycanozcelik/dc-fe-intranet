@@ -12,7 +12,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let holiday of holidays">
+      <tr *ngFor="let holiday of holidays$ | async">
         <td>{{ holiday.startDate }}</td>
         <td>{{ holiday.endDate }}</td>
         <td>{{ holiday.vacationWorkdays }}</td>

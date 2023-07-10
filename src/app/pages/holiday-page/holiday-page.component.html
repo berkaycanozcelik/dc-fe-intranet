@@ -1,10 +1,12 @@
 <div class="container">
   <mat-tab-group class="mt-3">
     <mat-tab label="Urlaub beantragen">
-      <app-holiday-form (holidaysChange)="onHolidaysChange($event)"></app-holiday-form>
+      <app-holiday-form
+        (holidaysChange)="onHolidaysChange($event)"
+      ></app-holiday-form>
     </mat-tab>
     <mat-tab label="Meine Urlaube">
-      <app-holiday-table [holidays]="holidays"></app-holiday-table
+      <app-holiday-table></app-holiday-table
     ></mat-tab>
   </mat-tab-group>
 </div>
