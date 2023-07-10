@@ -7,8 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { HolidayService } from 'src/app/services/holiday/holiday.service';
-import { Observable } from 'rxjs';
-import { Route, Router, RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 export interface PeriodicElement {
   name: string;
