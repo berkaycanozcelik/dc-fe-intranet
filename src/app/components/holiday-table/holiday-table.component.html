@@ -12,7 +12,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let holiday of holidays">
+      <tr *ngFor="let holiday of holidays; index as i">
         <td>{{ holiday.startDate }}</td>
         <td>{{ holiday.endDate }}</td>
         <td>{{ holiday.vacationWorkdays }}</td>
@@ -21,10 +21,20 @@
         <td>{{ holiday.status }}</td>
         <td>
           <div class="example-button-container">
-              <button class="btn" mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
-                <mat-icon>edit</mat-icon>
-              </button>
-            <button mat-mini-fab color="warn" aria-label="Example icon button with a filter list icon">
+            <button
+              (click)="onEdit(i)"
+              class="btn"
+              mat-mini-fab
+              color="primary"
+              aria-label="Example icon button with a menu icon"
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button
+              mat-mini-fab
+              color="warn"
+              aria-label="Example icon button with a filter list icon"
+            >
               <mat-icon>delete</mat-icon>
             </button>
           </div>

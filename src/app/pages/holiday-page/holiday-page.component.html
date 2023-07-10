@@ -1,12 +1,24 @@
 <div class="container">
-  <mat-tab-group class="mt-3">
-    <mat-tab label="Urlaub beantragen">
+  <mat-tab-group mat-tab-nav-ba class="mt-3">
+    <mat-tab *ngIf="!isEdit" label="Urlaub beantragen">
       <app-holiday-form
-        (holidaysChange)="onHolidaysChange($event)"
+        (holidayChange)="onHolidaysChange($event)"
+        [editHoliday]="editHoliday"
+        [isEditMode]="isEdit"
+      ></app-holiday-form>
+    </mat-tab>
+    <mat-tab *ngIf="isEdit" label="Urlaub bearbeiten">
+      <app-holiday-form
+        (holidayChange)="onHolidaysChange($event)"
+        [editHoliday]="editHoliday"
+        [isEditMode]="isEdit"
       ></app-holiday-form>
     </mat-tab>
     <mat-tab label="Meine Urlaube">
-      <app-holiday-table [holidays]="holidays"></app-holiday-table
+      <app-holiday-table
+        (editHoliday)="onEditHoliday($event)"
+        [holidays]="holidays"
+      ></app-holiday-table
     ></mat-tab>
   </mat-tab-group>
 </div>

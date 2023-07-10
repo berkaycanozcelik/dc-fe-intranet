@@ -25,9 +25,35 @@ export class HolidayComponent {
   holidays$: Observable<Holiday[]> = new Observable();
 
   holidays: Holiday[] = [];
+  editHoliday!: Holiday;
+  isEdit: boolean = false;
 
   onHolidaysChange(holiday: Holiday) {
-    this.holidays.push(holiday);
+    if (this.isEdit) {
+      this.holidayService
+        .updateHoliday(holiday, this.editHoliday.id!)
+        .subscribe(
+          (updatedHoliday) => {
+            // Handle success, e.g., show a success message or update the holiday in the 'holidays' array
+            console.log('Holiday updated successfully:', updatedHoliday);
+            this.holidays = this.holidays.map((h) =>
+              h.id === updatedHoliday.id ? updatedHoliday : h
+            );
+            this.isEdit = false;
+          },
+          (error) => {
+            // Handle error, e.g., display an error message
+            console.error('Error updating holiday:', error);
+          }
+        );
+    } else {
+      this.holidays.push(holiday);
+    }
+  }
+
+  onEditHoliday(holiday: Holiday) {
+    this.editHoliday = holiday;
+    this.isEdit = true;
   }
 
   ngOnInit(): void {

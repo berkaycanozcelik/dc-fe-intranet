@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   MatCalendarCellClassFunction,
@@ -25,7 +25,7 @@ import { HolidayService } from 'src/app/services/holiday/holiday.service';
   templateUrl: './holiday-form.component.html',
   styleUrls: ['./holiday-form.component.scss'],
 })
-export class HolidayFormComponent {
+export class HolidayFormComponent implements OnInit {
   constructor(private holidayService: HolidayService) {}
 
   dateClass: MatCalendarCellClassFunction<Date> = (cellDate, view) => {
@@ -39,8 +39,9 @@ export class HolidayFormComponent {
 
     return '';
   };
-
-  @Output() holidaysChange = new EventEmitter<Holiday>();
+  @Output() holidayChange = new EventEmitter<Holiday>();
+  @Input() editHoliday!: Holiday;
+  @Input() isEditMode: boolean = false;
 
   startDate: string = '';
   endDate: string = '';
@@ -52,30 +53,60 @@ export class HolidayFormComponent {
   replacement: string = '';
   status: string = 'Pending';
 
+  ngOnInit() {
+    if (this.isEditMode) {
+      this.startDate = this.editHoliday.startDate;
+      this.endDate = this.editHoliday.endDate;
+      this.remainingDays = this.editHoliday.remainingDays;
+      this.vacationWorkdays = this.editHoliday.vacationWorkdays;
+      this.reason = this.editHoliday.reason;
+      this.confirmation1 = this.editHoliday.confirmation1;
+      this.confirmation2 = this.editHoliday.confirmation2;
+      this.replacement = this.editHoliday.replacement;
+      this.status = this.editHoliday.status;
+    }
+  }
+
   submitForm() {
-    const holiday: Holiday = {
-      startDate: this.startDate,
-      endDate: this.endDate,
-      remainingDays: this.remainingDays,
-      vacationWorkdays: this.vacationWorkdays,
-      reason: this.reason,
-      confirmation1: this.confirmation1,
-      confirmation2: this.confirmation2,
-      replacement: this.replacement,
-      status: this.status,
-    };
+    if (!this.isEditMode) {
+      const holiday: Holiday = {
+        startDate: this.startDate,
+        endDate: this.endDate,
+        remainingDays: this.remainingDays,
+        vacationWorkdays: this.vacationWorkdays,
+        reason: this.reason,
+        confirmation1: this.confirmation1,
+        confirmation2: this.confirmation2,
+        replacement: this.replacement,
+        status: this.status,
+      };
 
-    this.holidayService.saveHoliday(holiday).subscribe(
-      (response) => {
-        console.log('Sucessfully saved holiday: ' + response);
-      },
-      (error) => {
-        // Handle error if log
-        console.log('Error by saving holiday: ' + error);
-      }
-    );
+      this.holidayService.saveHoliday(holiday).subscribe(
+        (response) => {
+          console.log('Sucessfully saved holiday: ' + response);
+        },
+        (error) => {
+          // Handle error if log
+          console.log('Error by saving holiday: ' + error);
+        }
+      );
+      this.holidayChange.emit(holiday);
+    } else {
+      const holiday: Holiday = {
+        startDate: this.startDate,
+        endDate: this.endDate,
+        remainingDays: this.remainingDays,
+        vacationWorkdays: this.vacationWorkdays,
+        reason: this.reason,
+        confirmation1: this.confirmation1,
+        confirmation2: this.confirmation2,
+        replacement: this.replacement,
+        status: this.status,
+      };
 
-    this.holidaysChange.emit(holiday);
+      this.holidayChange.emit(holiday);
+    }
+
     this.resetForm();
   }
 

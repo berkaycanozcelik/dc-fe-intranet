@@ -18,4 +18,9 @@ export class HolidayService {
   getHolidays(): Observable<Holiday[]> {
     return this.http.get<Holiday[]>(this.baseUrl);
   }
+
+  updateHoliday(holiday: Holiday, id: number): Observable<Holiday> {
+    const url = `${this.baseUrl}/${id}`;
+    return this.http.put<Holiday>(url, holiday);
+  }
 }
