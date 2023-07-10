@@ -23,4 +23,9 @@ export class HolidayService {
     const url = `${this.baseUrl}/${id}`;
     return this.http.put<Holiday>(url, holiday);
   }
+
+  deleteHoliday(id: number): Observable<void> {
+    const url = `${this.baseUrl}/${id}`;
+    return this.http.delete<void>(url);
+  }
 }
