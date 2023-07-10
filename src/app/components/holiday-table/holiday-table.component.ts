@@ -30,12 +30,6 @@ export interface PeriodicElement {
   templateUrl: './holiday-table.component.html',
   styleUrls: ['./holiday-table.component.scss'],
 })
-export default class HolidayTableComponent implements OnInit {
-  holidays$: Observable<Holiday[]> = new Observable();
-
-  constructor(private holidayService: HolidayService) {}
-
-  ngOnInit(): void {
-    this.holidays$ = this.holidayService.getHolidays();
-  }
+export default class HolidayTableComponent {
+  @Input() holidays: Holiday[] = [];
 }
