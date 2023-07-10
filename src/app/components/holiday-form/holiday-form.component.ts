@@ -40,7 +40,7 @@ export class HolidayFormComponent {
     return '';
   };
 
-  @Output() holidaysChange = new EventEmitter<Holiday[]>();
+  @Output() holidaysChange = new EventEmitter<Holiday>();
 
   startDate: string = '';
   endDate: string = '';
@@ -51,7 +51,6 @@ export class HolidayFormComponent {
   confirmation2: boolean = false;
   replacement: string = '';
   status: string = 'Pending';
-  holidays: Holiday[] = [];
 
   submitForm() {
     const holiday: Holiday = {
@@ -68,18 +67,16 @@ export class HolidayFormComponent {
 
     this.holidayService.saveHoliday(holiday).subscribe(
       (response) => {
-        console.log('Sucessfulr');
+        console.log('Sucessfully saved holiday: ' + response);
       },
       (error) => {
         // Handle error if log
-        console.log(error);
+        console.log('Error by saving holiday: ' + error);
       }
     );
 
-    this.holidays.push(holiday);
+    this.holidaysChange.emit(holiday);
     this.resetForm();
-    console.log('Form submitted. Holidays:', this.holidays);
-    this.holidaysChange.emit(this.holidays);
   }
 
   resetForm() {
