@@ -27,6 +27,7 @@ export class HolidayComponent {
   holidays: Holiday[] = [];
   editHoliday!: Holiday;
   isEdit: boolean = false;
+  selectedTabIndex: number = 0;
 
   onHolidaysChange(holiday: Holiday) {
     if (this.isEdit) {
