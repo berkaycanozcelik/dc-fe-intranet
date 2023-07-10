@@ -35,7 +35,6 @@ export class HolidayComponent {
         .subscribe(
           (updatedHoliday) => {
             // Handle success, e.g., show a success message or update the holiday in the 'holidays' array
-            console.log('Holiday updated successfully:', updatedHoliday);
             this.holidays = this.holidays.map((h) =>
               h.id === updatedHoliday.id ? updatedHoliday : h
             );
