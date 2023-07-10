@@ -14,4 +14,8 @@ export class HolidayService {
   saveHoliday(holiday: Holiday): Observable<Holiday> {
     return this.http.post<Holiday>(this.baseUrl, holiday);
   }
+
+  getHolidays(): Observable<Holiday[]> {
+    return this.http.get<Holiday[]>(this.baseUrl);
+  }
 }
