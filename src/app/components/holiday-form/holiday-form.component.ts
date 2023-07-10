@@ -7,8 +7,9 @@ import {
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { Holiday } from '../../models/holiday';
+import { HolidayService } from 'src/app/services/holiday/holiday.service';
 
 @Component({
   selector: 'app-holiday-form',
@@ -25,6 +26,8 @@ import { Holiday } from '../../models/holiday';
   styleUrls: ['./holiday-form.component.scss'],
 })
 export class HolidayFormComponent {
+  constructor(private holidayService: HolidayService) {}
+
   dateClass: MatCalendarCellClassFunction<Date> = (cellDate, view) => {
     // Only highligh dates inside the month view.
     if (view === 'month') {
@@ -62,6 +65,16 @@ export class HolidayFormComponent {
       replacement: this.replacement,
       status: this.status,
     };
+
+    this.holidayService.saveHoliday(holiday).subscribe(
+      (response) => {
+        console.log('Sucessfulr');
+      },
+      (error) => {
+        // Handle error if log
+        console.log(error);
+      }
+    );
 
     this.holidays.push(holiday);
     this.resetForm();
