@@ -6,12 +6,11 @@ import { ProfileComponent } from './pages/profile-page/profile-page.component';
 import { HolidayComponent } from './pages/holiday-page/holiday-page.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' }, // Default route
+  { path: '', pathMatch: 'full', component: LandingComponent }, // Default route
   { path: 'login', component: LoginComponent },
-  { path: 'landing', component: LandingComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'holiday', component: HolidayComponent },
-  { path: '**', redirectTo: '/login' }, // Redirect to login page for any other route
+  { path: '**', redirectTo: '/' }, // Redirect to login page for any other route
 ];
 
 @NgModule({
