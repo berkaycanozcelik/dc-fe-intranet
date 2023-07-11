@@ -45,7 +45,6 @@ export class HolidayFormComponent implements OnInit {
 
   startDate: string = '';
   endDate: string = '';
-  remainingDays: number = 0;
   vacationWorkdays: number = 0;
   reason: string = '';
   confirmation1: boolean = false;
@@ -57,7 +56,6 @@ export class HolidayFormComponent implements OnInit {
     if (this.isEditMode) {
       this.startDate = this.editHoliday.startDate;
       this.endDate = this.editHoliday.endDate;
-      this.remainingDays = this.editHoliday.remainingDays;
       this.vacationWorkdays = this.editHoliday.vacationWorkdays;
       this.reason = this.editHoliday.reason;
       this.confirmation1 = this.editHoliday.confirmation1;
@@ -72,7 +70,6 @@ export class HolidayFormComponent implements OnInit {
       const holiday: Holiday = {
         startDate: this.startDate,
         endDate: this.endDate,
-        remainingDays: this.remainingDays,
         vacationWorkdays: this.vacationWorkdays,
         reason: this.reason,
         confirmation1: this.confirmation1,
@@ -95,7 +92,6 @@ export class HolidayFormComponent implements OnInit {
       const holiday: Holiday = {
         startDate: this.startDate,
         endDate: this.endDate,
-        remainingDays: this.remainingDays,
         vacationWorkdays: this.vacationWorkdays,
         reason: this.reason,
         confirmation1: this.confirmation1,
@@ -113,7 +109,6 @@ export class HolidayFormComponent implements OnInit {
   resetForm() {
     this.startDate = '';
     this.endDate = '';
-    this.remainingDays = 0;
     this.vacationWorkdays = 0;
     this.reason = '';
     this.confirmation1 = false;
