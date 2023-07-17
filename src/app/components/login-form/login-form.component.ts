@@ -8,6 +8,7 @@ import {
   FormsModule,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-form',
@@ -20,12 +21,18 @@ export class LoginFormComponent {
   email: string = '';
   password: string = '';
 
-  constructor(private loginService: LoginService) {}
+  isLoggedIn: boolean = false;
+
+  constructor(private loginService: LoginService, private router: Router) {}
 
   submitForm() {
     this.loginService.login(this.email, this.password).subscribe(
       (response) => {
-        console.log(response);
+        sessionStorage.setItem('token', response.token);
+        this.isLoggedIn = true;
+        if (this.isLoggedIn) {
+          this.router.navigate(['/']);
+        }
       },
       (error) => {
         console.log(error);
