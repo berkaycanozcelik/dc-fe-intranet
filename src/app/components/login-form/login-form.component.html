@@ -1,13 +1,14 @@
 <div class="login-container">
-  <form class="login-form m-2">
+  <form class="login-form m-2" (ngSubmit)="submitForm()" >
     <div class="form-group">
-      <label for="username">Username</label>
+      <label for="email">Email</label>
       <input
-        type="text"
-        id="username"
-        name="username"
+        type="email"
+        id="email"
+        name="email"
         class="form-control"
-        placeholder="Enter your username"
+        placeholder="Enter your email"
+        [(ngModel)]="email"
         required
       />
     </div>
@@ -19,6 +20,7 @@
         name="password"
         class="form-control"
         placeholder="Enter your password"
+        [(ngModel)]="password"
         required
       />
     </div>
