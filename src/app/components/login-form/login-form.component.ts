@@ -12,20 +12,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./login-form.component.scss'],
 })
 export class LoginFormComponent {
-  isLoggedIn: boolean = false;
-
   constructor(private loginService: LoginService, private router: Router) {}
 
   onSubmit(form: NgForm) {
-    console.log(form.value);
-
     this.loginService.login(form.value.email, form.value.password).subscribe(
       (response) => {
         sessionStorage.setItem('token', response.token);
-        this.isLoggedIn = true;
-        if (this.isLoggedIn) {
-          this.router.navigate(['/']);
-        }
+        this.router.navigate(['/']);
+        form.reset();
       },
       (error) => {
         console.log(error);
