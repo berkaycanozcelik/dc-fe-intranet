@@ -7,8 +7,11 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent {
-
+  logout() {
+    sessionStorage.clear();
+    console.log('logged out sucessfuly');
+  }
 }
