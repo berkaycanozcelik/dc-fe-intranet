@@ -1,6 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subject, catchError, tap, throwError } from 'rxjs';
+import {
+  Observable,
+  ReplaySubject,
+  catchError,
+  tap,
+  throwError,
+} from 'rxjs';
 import { LoginData } from 'src/app/models/loginData';
 import { Role } from 'src/app/models/role';
 import { User } from 'src/app/models/user.model';
@@ -16,7 +22,7 @@ export interface AuthResponseData {
   providedIn: 'root',
 })
 export class AuthService {
-  user = new Subject<User>();
+  user = new ReplaySubject<User>(1);
 
   constructor(private http: HttpClient) {}
 
