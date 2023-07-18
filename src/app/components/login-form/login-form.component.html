@@ -31,12 +31,18 @@
       />
     </div>
     <button
+      *ngIf="!isLoading"
       type="submit"
       class="btn btn-primary login-button"
       [disabled]="!loginForm.valid"
     >
       Login
     </button>
+    <div *ngIf="isLoading">
+      <div class="d-flex justify-content-center mt-4 mb-3">
+        <div class="spinner-border" role="status"></div>
+      </div>
+    </div>
     <div class="signup-link">Forgot your password? <a href="#">Reset</a></div>
   </form>
 </div>
