@@ -4,9 +4,10 @@ import { Observable } from 'rxjs';
 import { LoginData } from 'src/app/models/loginData';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
-export class LoginService {
+export class AuthService {
+
   constructor(private http: HttpClient) {}
 
   private baseUrl: string = 'http://localhost:8080/api/auth';

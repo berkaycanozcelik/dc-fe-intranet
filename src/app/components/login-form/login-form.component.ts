@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LoginService } from 'src/app/services/login/login.service';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-login-form',
@@ -13,12 +13,13 @@ import { Router } from '@angular/router';
 })
 export class LoginFormComponent {
   isLoading = false;
+  error: string = '';
 
-  constructor(private loginService: LoginService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   onSubmit(form: NgForm) {
     this.isLoading = true;
-    this.loginService.login(form.value.email, form.value.password).subscribe(
+    this.authService.login(form.value.email, form.value.password).subscribe(
       (response) => {
         sessionStorage.setItem('token', response.token);
         this.isLoading = false;
@@ -27,7 +28,7 @@ export class LoginFormComponent {
       },
       (error) => {
         this.isLoading = false;
-        console.log(error);
+        this.error = 'An error occured';
       }
     );
   }
