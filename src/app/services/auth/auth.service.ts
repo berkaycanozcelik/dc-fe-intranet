@@ -1,12 +1,23 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, throwError } from 'rxjs';
+import { Observable, Subject, catchError, tap, throwError } from 'rxjs';
 import { LoginData } from 'src/app/models/loginData';
+import { Role } from 'src/app/models/role';
+import { User } from 'src/app/models/user.model';
+
+export interface AuthResponseData {
+  id: string;
+  role: string;
+  token: string;
+  expirationDate: string;
+}
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  user = new Subject<User>();
+
   constructor(private http: HttpClient) {}
 
   private baseUrl: string = 'http://localhost:8080/api/auth';
@@ -18,7 +29,7 @@ export class AuthService {
     };
     return (
       this.http
-        .post(`${this.baseUrl}/authenticate`, loginData)
+        .post<AuthResponseData>(`${this.baseUrl}/authenticate`, loginData)
 
         /* 
     **
@@ -30,7 +41,7 @@ export class AuthService {
             let errorMessage = 'An Error occurred';
 
             if (!errorRes.status) {
-              errorMessage = "An unknown Error occurred"
+              errorMessage = 'An unknown Error occurred';
               return throwError(errorMessage);
             }
 
@@ -43,6 +54,18 @@ export class AuthService {
                 break;
             }
             return throwError(errorMessage);
+          }),
+          tap((resData) => {
+            const expirationDate = new Date(
+              new Date().getTime() + +resData.expirationDate
+            );
+            const user = new User(
+              resData.id,
+              resData.role === 'USER' ? Role.USER : Role.ADMIN,
+              resData.token,
+              expirationDate
+            );
+            this.user.next(user);
           })
         )
     );
