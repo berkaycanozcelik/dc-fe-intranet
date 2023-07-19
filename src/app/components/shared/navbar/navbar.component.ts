@@ -23,9 +23,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
     });
   }
 
-  logout() {
-    sessionStorage.clear();
-    console.log('logged out sucessfuly');
+  onLogout() {
+    this.authService.logout();
+    sessionStorage.removeItem('data');
     this.isAuthenticated = false;
   }
 

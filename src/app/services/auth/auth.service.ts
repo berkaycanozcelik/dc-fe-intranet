@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   BehaviorSubject,
   Observable,
@@ -25,7 +26,7 @@ export interface AuthResponseData {
 export class AuthService {
   user = new BehaviorSubject<User | null>(null);
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   private baseUrl: string = 'http://localhost:8080/api/auth';
 
@@ -76,5 +77,10 @@ export class AuthService {
           })
         )
     );
+  }
+
+  logout() {
+    this.user.next(null);
+    this.router.navigate(['/login']);
   }
 }
