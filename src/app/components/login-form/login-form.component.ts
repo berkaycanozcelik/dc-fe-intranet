@@ -22,7 +22,7 @@ export class LoginFormComponent {
     this.isLoading = true;
     this.authService.login(form.value.email, form.value.password).subscribe(
       (response) => {
-        sessionStorage.setItem('token', JSON.stringify(response));
+        sessionStorage.setItem('data', JSON.stringify(response));
         this.isLoading = false;
         this.router.navigate(['/']);
         form.reset();
