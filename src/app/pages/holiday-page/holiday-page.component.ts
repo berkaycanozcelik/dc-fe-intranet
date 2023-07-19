@@ -19,7 +19,7 @@ import { HolidayService } from 'src/app/services/holiday/holiday.service';
     HolidayTableComponent,
   ],
 })
-export class HolidayComponent {
+export class HolidayPageComponent {
   constructor(private holidayService: HolidayService) {}
 
   holidays$: Observable<Holiday[]> = new Observable();

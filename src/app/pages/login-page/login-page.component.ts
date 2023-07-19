@@ -9,4 +9,4 @@ import { LoginFormComponent } from 'src/app/components/login-form/login-form.com
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.scss'],
 })
-export class LoginComponent {}
+export class LoginPageComponent {}

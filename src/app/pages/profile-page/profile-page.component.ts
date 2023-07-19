@@ -16,4 +16,4 @@ import { RouterModule } from '@angular/router';
   templateUrl: './profile-page.component.html',
   styleUrls: ['./profile-page.component.scss'],
 })
-export class ProfileComponent {}
+export class ProfilePageComponent {}
