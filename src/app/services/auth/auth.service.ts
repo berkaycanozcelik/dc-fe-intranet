@@ -60,7 +60,7 @@ export class AuthService {
           tap((resData) => {
             const expirationDate = new Date(+resData.expirationDate);
             const user = new User(
-              resData.id,
+              +resData.id,
               resData.role === 'USER' ? Role.USER : Role.ADMIN,
               resData.token,
               expirationDate
@@ -88,7 +88,7 @@ export class AuthService {
     } = data ? JSON.parse(data) : {};
 
     const loadedUser = new User(
-      userData.id,
+      +userData.id,
       userData.role === 'USER' ? Role.USER : Role.ADMIN,
       userData.token,
       new Date(userData.expirationDate)
