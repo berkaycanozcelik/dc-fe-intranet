@@ -18,6 +18,7 @@ export interface AuthResponseData {
 })
 export class AuthService {
   user = new BehaviorSubject<User | null>(null);
+  private tokenExpirationTimer: any;
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -57,9 +58,7 @@ export class AuthService {
             return throwError(errorMessage);
           }),
           tap((resData) => {
-            const expirationDate = new Date(
-              new Date().getTime() + +resData.expirationDate
-            );
+            const expirationDate = new Date(+resData.expirationDate);
             const user = new User(
               resData.id,
               resData.role === 'USER' ? Role.USER : Role.ADMIN,
@@ -68,6 +67,7 @@ export class AuthService {
             );
             sessionStorage.setItem('data', JSON.stringify(resData));
             this.user.next(user);
+            this.autoLogout(+resData.expirationDate - new Date().getTime());
           })
         )
     );
@@ -96,11 +96,27 @@ export class AuthService {
 
     if (loadedUser.token) {
       this.user.next(loadedUser);
+      const expirationDuration =
+        +userData.expirationDate - new Date().getTime();
+      this.autoLogout(expirationDuration);
     }
   }
 
   logout() {
     this.user.next(null);
     this.router.navigate(['/login']);
+    sessionStorage.removeItem('data');
+    if (this.tokenExpirationTimer) {
+      clearTimeout(this.tokenExpirationTimer);
+    }
+
+    this.tokenExpirationTimer = null;
+  }
+
+  autoLogout(expirationDuration: number) {
+    this.tokenExpirationTimer = setTimeout(() => {
+      this.logout();
+    }, expirationDuration);
+    console.log('time to autologout: ' + expirationDuration);
   }
 }

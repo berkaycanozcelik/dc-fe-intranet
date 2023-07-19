@@ -25,7 +25,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   onLogout() {
     this.authService.logout();
-    sessionStorage.removeItem('data');
     this.isAuthenticated = false;
   }
 
