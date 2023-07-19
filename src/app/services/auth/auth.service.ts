@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
+  BehaviorSubject,
   Observable,
   ReplaySubject,
   catchError,
@@ -22,7 +23,7 @@ export interface AuthResponseData {
   providedIn: 'root',
 })
 export class AuthService {
-  user = new ReplaySubject<User>(1);
+  user = new BehaviorSubject<User | null>(null);
 
   constructor(private http: HttpClient) {}
 
