@@ -5,7 +5,15 @@
         <app-profile-card [user]="user"></app-profile-card>
       </div>
       <div class="col-md-8">
-        <router-outlet></router-outlet>
+        <app-profile-detail-card
+          [user]="user"
+          *ngIf="!isEdit"
+          (Edit)="onEdit($event)"
+        ></app-profile-detail-card>
+        <app-profile-detail-update-card
+          *ngIf="isEdit"
+          [user]="user"
+        ></app-profile-detail-update-card>
       </div>
     </div>
   </div>

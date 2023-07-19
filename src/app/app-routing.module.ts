@@ -5,7 +5,7 @@ import { LandingPageComponent } from './pages/landing-page/landing-page.componen
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { HolidayPageComponent } from './pages/holiday-page/holiday-page.component';
 import { AuthGuard } from './services/auth/auth.guard';
-import { ProfileDetailCardComponent } from './components/profile/profile-detail-card/profile-detail-card.component';
+import ProfileDetailCardComponent from './components/profile/profile-detail-card/profile-detail-card.component';
 import { ProfileDetailUpdateCardComponent } from './components/profile/profile-detail-update-card/profile-detail-update-card.component';
 import { ManagementPageComponent } from './pages/management-page/management-page/management-page.component';
 
@@ -20,10 +20,6 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfilePageComponent,
-    children: [
-      { path: '', component: ProfileDetailCardComponent },
-      { path: 'update', component: ProfileDetailUpdateCardComponent },
-    ],
     canActivate: [AuthGuard],
   },
   {
