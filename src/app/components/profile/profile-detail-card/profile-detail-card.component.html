@@ -4,14 +4,16 @@
       <div class="col-sm-3">
         <h6 class="mb-0">Full Name</h6>
       </div>
-      <div class="col-sm-9 text-secondary">Kenneth Valdez</div>
+      <div class="col-sm-9 text-secondary">
+        {{ user.firstName }} {{ user.lastName }}
+      </div>
     </div>
     <hr />
     <div class="row">
       <div class="col-sm-3">
         <h6 class="mb-0">Email</h6>
       </div>
-      <div class="col-sm-9 text-secondary">fip@jukmuh.al</div>
+      <div class="col-sm-9 text-secondary">{{ user.email }}</div>
     </div>
     <hr />
     <div class="row">
@@ -32,17 +34,12 @@
       <div class="col-sm-3">
         <h6 class="mb-0">Address</h6>
       </div>
-      <div class="col-sm-9 text-secondary">Bay Area, San Francisco, CA</div>
+      <div class="col-sm-9 text-secondary">Adress holder</div>
     </div>
     <hr />
     <div class="row">
       <div class="col-sm-12">
-        <a
-          class="btn btn-info"
-          target="__blank"
-          href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills"
-          >Edit</a
-        >
+        <a class="btn btn-info" target="__blank" (click)="onEdit()">Edit</a>
       </div>
     </div>
   </div>
