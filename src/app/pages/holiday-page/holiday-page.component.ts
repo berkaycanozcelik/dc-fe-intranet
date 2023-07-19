@@ -58,6 +58,8 @@ export class HolidayComponent {
 
   ngOnInit(): void {
     this.holidayService.getHolidays().subscribe((h) => {
+      console.log('Retrieved holidays: ', h);
+
       return (this.holidays = h);
     });
   }
