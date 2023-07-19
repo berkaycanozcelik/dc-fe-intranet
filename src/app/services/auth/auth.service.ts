@@ -1,14 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import {
-  BehaviorSubject,
-  Observable,
-  ReplaySubject,
-  catchError,
-  tap,
-  throwError,
-} from 'rxjs';
+import { BehaviorSubject, Observable, catchError, tap, throwError } from 'rxjs';
 import { LoginData } from 'src/app/models/loginData';
 import { Role } from 'src/app/models/role';
 import { User } from 'src/app/models/user.model';
@@ -73,10 +66,37 @@ export class AuthService {
               resData.token,
               expirationDate
             );
+            sessionStorage.setItem('data', JSON.stringify(resData));
             this.user.next(user);
           })
         )
     );
+  }
+
+  autoLoginWithSessionStorage() {
+    const data = sessionStorage.getItem('data');
+
+    if (data == undefined) {
+      return;
+    }
+
+    const userData: {
+      id: string;
+      role: string;
+      token: string;
+      expirationDate: string;
+    } = data ? JSON.parse(data) : {};
+
+    const loadedUser = new User(
+      userData.id,
+      userData.role === 'USER' ? Role.USER : Role.ADMIN,
+      userData.token,
+      new Date(userData.expirationDate)
+    );
+
+    if (loadedUser.token) {
+      this.user.next(loadedUser);
+    }
   }
 
   logout() {
