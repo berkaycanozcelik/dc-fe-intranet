@@ -55,7 +55,6 @@ export default class HolidayTableComponent {
         if (index !== -1) {
           // Splice the holiday from the array
           this.holidays.splice(index, 1);
-          console.log('Holiday deleted successfully:', deleteHoliday.id!);
         }
       },
       (error) => {
