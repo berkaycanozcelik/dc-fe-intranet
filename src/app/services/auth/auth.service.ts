@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, catchError, tap, throwError } from 'rxjs';
 import { LoginData } from 'src/app/models/loginData';
 import { Role } from 'src/app/models/role';
-import { User } from 'src/app/models/user.model';
+import { User, authUser } from 'src/app/models/user.model';
 
 export interface AuthResponseData {
   id: string;
@@ -17,7 +17,7 @@ export interface AuthResponseData {
   providedIn: 'root',
 })
 export class AuthService {
-  user = new BehaviorSubject<User | null>(null);
+  user = new BehaviorSubject<authUser | null>(null);
   private tokenExpirationTimer: any;
 
   constructor(private http: HttpClient, private router: Router) {}
@@ -59,7 +59,7 @@ export class AuthService {
           }),
           tap((resData) => {
             const expirationDate = new Date(+resData.expirationDate);
-            const user = new User(
+            const user = new authUser(
               +resData.id,
               resData.role === 'USER' ? Role.USER : Role.ADMIN,
               resData.token,
@@ -87,7 +87,7 @@ export class AuthService {
       expirationDate: string;
     } = data ? JSON.parse(data) : {};
 
-    const loadedUser = new User(
+    const loadedUser = new authUser(
       +userData.id,
       userData.role === 'USER' ? Role.USER : Role.ADMIN,
       userData.token,

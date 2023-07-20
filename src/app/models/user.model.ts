@@ -1,6 +1,6 @@
 import { Role } from './role';
 
-export class User {
+export class authUser {
   constructor(
     public id: number,
     public role: Role,
@@ -22,9 +22,9 @@ export interface User {
   lastName: string;
   role: Role;
   email: string;
-  password: string;
-  userDetail: UserDetail;
-  vacationDays: VacationDays;
+  password?: string;
+  userDetail: UserDetail | null;
+  vacationDays: VacationDays | null;
   holidays: Holiday[];
 }
 
