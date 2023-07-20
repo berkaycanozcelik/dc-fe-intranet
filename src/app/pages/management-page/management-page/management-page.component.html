@@ -1,25 +1,30 @@
-<div class="mat-elevation-z8">
-  <table mat-table [dataSource]="dataSource">
+<div class="mat-elevation-z8 m-3">
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    matSort
+    (matSortChange)="announceSortChange($event)"
+  >
     <!-- Position Column -->
-    <ng-container matColumnDef="Name">
-      <th mat-header-cell *matHeaderCellDef>Name</th>
+    <ng-container matColumnDef="firstName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
       <td mat-cell *matCellDef="let user">{{ user.firstName }}</td>
     </ng-container>
 
     <!-- Name Column -->
-    <ng-container matColumnDef="LastName">
-      <th mat-header-cell *matHeaderCellDef>LastName</th>
+    <ng-container matColumnDef="lastName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>LastName</th>
       <td mat-cell *matCellDef="let user">{{ user.lastName }}</td>
     </ng-container>
 
-    <!-- Weight Column -->
-    <ng-container matColumnDef="Email">
+    <!-- Email Column -->
+    <ng-container matColumnDef="email">
       <th mat-header-cell *matHeaderCellDef>Email</th>
       <td mat-cell *matCellDef="let user">{{ user.email }}</td>
     </ng-container>
 
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="Role">
+    <!-- Role Column -->
+    <ng-container matColumnDef="role">
       <th mat-header-cell *matHeaderCellDef>Role</th>
       <td mat-cell *matCellDef="let user">{{ user.role }}</td>
     </ng-container>
