@@ -61,7 +61,11 @@ export class AuthService {
             const expirationDate = new Date(+resData.expirationDate);
             const user = new authUser(
               +resData.id,
-              resData.role === 'USER' ? Role.USER : Role.ADMIN,
+              resData.role === 'EMPLOYEE'
+                ? Role.EMPLOYEE
+                : 'MANAGER'
+                ? Role.MANAGER
+                : Role.ADMIN,
               resData.token,
               expirationDate
             );
@@ -89,7 +93,11 @@ export class AuthService {
 
     const loadedUser = new authUser(
       +userData.id,
-      userData.role === 'USER' ? Role.USER : Role.ADMIN,
+      userData.role === 'EMPLOYEE'
+        ? Role.EMPLOYEE
+        : 'MANAGER'
+        ? Role.MANAGER
+        : Role.ADMIN,
       userData.token,
       new Date(userData.expirationDate)
     );
