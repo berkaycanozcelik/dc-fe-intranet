@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>Action</h1>
+<div mat-dialog-content>
+  Möchten Sie <b>{{ data.firstName }} {{ data.lastName }}</b> löschen
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onNoClick()">Abbrechen</button>
+  <button mat-button [mat-dialog-close]="data.id" cdkFocusInitial>
+    Weiter
+  </button>
+</div>

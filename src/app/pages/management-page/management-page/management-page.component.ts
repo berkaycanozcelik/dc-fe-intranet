@@ -4,13 +4,22 @@ import { UserService } from 'src/app/services/user/user.service';
 import { User } from 'src/app/models/user.model';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+
 import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { DialogComponent } from 'src/app/components/shared/dialog/dialog.component';
 
 @Component({
   selector: 'app-management-page',
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatPaginatorModule, MatSortModule],
+  imports: [
+    CommonModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatDialogModule,
+  ],
   templateUrl: './management-page.component.html',
   styleUrls: ['./management-page.component.scss'],
 })
@@ -36,7 +45,8 @@ export class ManagementPageComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private _liveAnnouncer: LiveAnnouncer
+    private _liveAnnouncer: LiveAnnouncer,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -45,6 +55,18 @@ export class ManagementPageComponent implements OnInit {
 
       this.dataSource.data = this.users;
       this.dataSource.sort = this.sort;
+    });
+  }
+
+  openDialog(user: User): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      data: user,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.onDelete(result);
+      }
     });
   }
 
@@ -71,7 +93,9 @@ export class ManagementPageComponent implements OnInit {
     );
   }
 
-  onEdit(userId: number) {}
+  onEdit(userId: number) {
+    //TODO: add onEdit
+  }
 
   fetchUsers() {
     this.userService.getAllUsers().subscribe(
