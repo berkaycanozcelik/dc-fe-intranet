@@ -17,7 +17,13 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 export class ManagementPageComponent implements OnInit {
   users: User[] = [];
 
-  displayedColumns: string[] = ['firstName', 'lastName', 'email', 'role'];
+  displayedColumns: string[] = [
+    'firstName',
+    'lastName',
+    'email',
+    'role',
+    'actions',
+  ];
   dataSource = new MatTableDataSource<User>(this.users);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -36,6 +42,8 @@ export class ManagementPageComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getAllUsers().subscribe((users) => {
       this.users = users;
+      console.log(users);
+
       this.dataSource.data = this.users;
       this.dataSource.sort = this.sort;
     });
@@ -51,5 +59,32 @@ export class ManagementPageComponent implements OnInit {
     } else {
       this._liveAnnouncer.announce('Sorting cleared');
     }
+  }
+
+  onDelete(userId: number) {
+    this.userService.deleteUser(userId).subscribe(
+      (res) => {
+        this.fetchUsers();
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+
+  onEdit(userId: number) {}
+
+  fetchUsers() {
+    this.userService.getAllUsers().subscribe(
+      (users) => {
+        this.users = users; // Assuming your service returns an array of users
+
+        this.dataSource.data = this.users;
+        this.dataSource.sort = this.sort;
+      },
+      (error) => {
+        console.error('Error fetching users:', error);
+      }
+    );
   }
 }
