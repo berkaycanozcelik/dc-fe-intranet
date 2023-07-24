@@ -42,7 +42,6 @@ export class ManagementPageComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getAllUsers().subscribe((users) => {
       this.users = users;
-      console.log(users);
 
       this.dataSource.data = this.users;
       this.dataSource.sort = this.sort;
