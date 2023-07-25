@@ -9,8 +9,8 @@
       />
       <div class="mt-3" *ngIf="user">
         <h4>{{ user!.firstName }} {{ user!.lastName }}</h4>
-        <p class="text-secondary mb-1">Full Stack Developer</p>
-        <p class="text-muted font-size-sm">Address placeholder</p>
+        <p class="text-secondary mb-1">{{ user.userDetail?.title }}</p>
+        <p class="text-muted font-size-sm">{{ user.userDetail?.team }}</p>
       </div>
       <!--TODO: !user template-->
     </div>

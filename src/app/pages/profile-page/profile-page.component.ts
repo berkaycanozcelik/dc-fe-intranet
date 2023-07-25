@@ -35,16 +35,16 @@ export class ProfilePageComponent implements OnInit {
   ngOnInit(): void {
     this.authService.user.pipe(take(1)).subscribe((user) => {
       this.id = +user!.id;
-    });
 
-    if (this.id) {
-      this.userService
-        .getUserById(+this.id)
-        .pipe(take(1))
-        .subscribe((user) => {
-          this.user = user;
-        });
-    }
+      if (this.id) {
+        this.userService
+          .getUserById(this.id)
+          .pipe(take(1))
+          .subscribe((user) => {
+            this.user = user;
+          });
+      }
+    });
   }
 
   onEdit(event: boolean): void {

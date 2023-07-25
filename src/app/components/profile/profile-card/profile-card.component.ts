@@ -11,4 +11,5 @@ import { User } from 'src/app/models/user.model';
 })
 export class ProfileCardComponent {
   @Input() user!: User;
+
 }
