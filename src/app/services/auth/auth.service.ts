@@ -24,6 +24,13 @@ export class AuthService {
 
   private baseUrl: string = 'http://localhost:8080/api/auth';
 
+  register(registerData: any): Observable<any> {
+    return this.http.post<AuthResponseData>(
+      `${this.baseUrl}/register`,
+      registerData
+    );
+  }
+
   login(email: string, password: string): Observable<any> {
     const loginData: LoginData = {
       email: email,
