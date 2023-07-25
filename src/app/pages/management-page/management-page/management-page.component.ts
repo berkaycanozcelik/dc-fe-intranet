@@ -71,10 +71,14 @@ export class ManagementPageComponent implements OnInit {
     });
   }
   openUserDialog() {
-    this.dialog.open(AddUserDialogComponent, {
+    const addUserDialog = this.dialog.open(AddUserDialogComponent, {
       disableClose: true,
-      height: '1054px',
+      height: '1136px',
       width: '500px',
+    });
+
+    addUserDialog.afterClosed().subscribe(() => {
+      this.fetchUsers();
     });
   }
 
