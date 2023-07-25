@@ -32,7 +32,10 @@ export interface UserDetail {
   id: number;
   address: string;
   phoneNumber: string;
-  email: string;
+  birthday: string;
+  title: string;
+  manager: string;
+  team: string;
 }
 
 export interface VacationDays {
