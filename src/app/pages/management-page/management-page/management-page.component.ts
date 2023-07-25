@@ -24,7 +24,11 @@ import { DialogComponent } from 'src/app/components/shared/dialog/dialog.compone
   styleUrls: ['./management-page.component.scss'],
 })
 export class ManagementPageComponent implements OnInit {
+onView(arg0: any) {
+throw new Error('Method not implemented.');
+}
   users: User[] = [];
+  authUserRole: string = '';
 
   displayedColumns: string[] = [
     'firstName',
@@ -50,6 +54,16 @@ export class ManagementPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+
+    const data = sessionStorage.getItem('data')
+    
+    if(data){
+      let user = JSON.parse(data)
+      this.authUserRole = user.role
+      console.log(this.authUserRole);
+      
+    }
+
     this.userService.getAllUsers().subscribe((users) => {
       this.users = users;
 

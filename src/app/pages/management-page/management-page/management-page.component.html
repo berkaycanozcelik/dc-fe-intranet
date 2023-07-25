@@ -51,6 +51,14 @@
         <div>
           <button
             type="button"
+            class="btn btn-primary"
+            (click)="onView(user.id)"
+            style="margin-right: 8px"
+          >
+            View
+          </button>
+          <button
+            type="button"
             class="btn btn-warning"
             (click)="onEdit(user.id)"
             style="margin-right: 8px"
@@ -58,6 +66,7 @@
             Edit
           </button>
           <button
+            *ngIf="authUserRole === 'ADMIN'"
             type="button"
             class="btn btn-danger"
             (click)="openDialog(user)"
