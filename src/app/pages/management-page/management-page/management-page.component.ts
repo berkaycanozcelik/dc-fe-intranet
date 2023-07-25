@@ -9,6 +9,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { DialogComponent } from 'src/app/components/shared/dialog/dialog.component';
+import { AddUserDialogComponent } from 'src/app/components/management/add-user-dialog/add-user-dialog.component';
 
 @Component({
   selector: 'app-management-page',
@@ -24,9 +25,9 @@ import { DialogComponent } from 'src/app/components/shared/dialog/dialog.compone
   styleUrls: ['./management-page.component.scss'],
 })
 export class ManagementPageComponent implements OnInit {
-onView(arg0: any) {
-throw new Error('Method not implemented.');
-}
+  onView(arg0: any) {
+    throw new Error('Method not implemented.');
+  }
   users: User[] = [];
   authUserRole: string = '';
 
@@ -54,14 +55,12 @@ throw new Error('Method not implemented.');
   ) {}
 
   ngOnInit(): void {
+    const data = sessionStorage.getItem('data');
 
-    const data = sessionStorage.getItem('data')
-    
-    if(data){
-      let user = JSON.parse(data)
-      this.authUserRole = user.role
+    if (data) {
+      let user = JSON.parse(data);
+      this.authUserRole = user.role;
       console.log(this.authUserRole);
-      
     }
 
     this.userService.getAllUsers().subscribe((users) => {
@@ -69,6 +68,13 @@ throw new Error('Method not implemented.');
 
       this.dataSource.data = this.users;
       this.dataSource.sort = this.sort;
+    });
+  }
+  openUserDialog() {
+    this.dialog.open(AddUserDialogComponent, {
+      disableClose: true,
+      height: '1054px',
+      width: '500px',
     });
   }
 
