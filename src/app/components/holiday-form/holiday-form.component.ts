@@ -7,7 +7,7 @@ import {
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
-import { FormsModule, NgForm } from '@angular/forms';
+import { FormGroup, FormsModule, NgForm } from '@angular/forms';
 import { Holiday } from '../../models/holiday';
 import { HolidayService } from 'src/app/services/holiday/holiday.service';
 
@@ -65,55 +65,21 @@ export class HolidayFormComponent implements OnInit {
     }
   }
 
-  submitForm() {
+  submitForm(form: NgForm) {
     if (!this.isEditMode) {
-      const holiday: Holiday = {
-        startDate: this.startDate,
-        endDate: this.endDate,
-        vacationWorkdays: this.vacationWorkdays,
-        reason: this.reason,
-        confirmation1: this.confirmation1,
-        confirmation2: this.confirmation2,
-        replacement: this.replacement,
-        status: this.status,
-      };
-
-      this.holidayService.saveHoliday(holiday).subscribe(
+      this.holidayService.saveHoliday(form.value).subscribe(
         (response) => {
           console.log('Sucessfully saved holiday: ' + response);
+          form.reset();
         },
         (error) => {
           // Handle error if log
           console.log('Error by saving holiday: ' + error);
         }
       );
-      this.holidayChange.emit(holiday);
+      this.holidayChange.emit(form.value);
     } else {
-      const holiday: Holiday = {
-        startDate: this.startDate,
-        endDate: this.endDate,
-        vacationWorkdays: this.vacationWorkdays,
-        reason: this.reason,
-        confirmation1: this.confirmation1,
-        confirmation2: this.confirmation2,
-        replacement: this.replacement,
-        status: this.status,
-      };
-
-      this.holidayChange.emit(holiday);
+      this.holidayChange.emit(form.value);
     }
-
-    this.resetForm();
-  }
-
-  resetForm() {
-    this.startDate = '';
-    this.endDate = '';
-    this.vacationWorkdays = 0;
-    this.reason = '';
-    this.confirmation1 = false;
-    this.confirmation2 = false;
-    this.replacement = '';
-    this.status = 'Pending';
   }
 }
