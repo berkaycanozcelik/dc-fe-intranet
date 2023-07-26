@@ -123,6 +123,9 @@
       <label for="team">Team</label>
       <input type="text" id="team" name="team" [(ngModel)]="user.team" />
     </div>
-    <button [disabled]="!registerForm.valid" type="submit">Add User</button>
+    <button [disabled]="!registerForm.valid" type="submit">
+      <div *ngIf="isEditMode">Update User</div>
+      <div *ngIf="!isEditMode">Add User</div>
+    </button>
   </form>
 </div>
