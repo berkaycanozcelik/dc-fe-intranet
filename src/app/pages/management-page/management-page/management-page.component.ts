@@ -60,7 +60,6 @@ export class ManagementPageComponent implements OnInit {
     if (data) {
       let user = JSON.parse(data);
       this.authUserRole = user.role;
-      console.log(this.authUserRole);
     }
 
     this.userService.getAllUsers().subscribe((users) => {
@@ -72,6 +71,20 @@ export class ManagementPageComponent implements OnInit {
   }
   openUserDialog() {
     const addUserDialog = this.dialog.open(AddUserDialogComponent, {
+      hasBackdrop: true,
+      disableClose: true,
+      height: '1136px',
+      width: '500px',
+    });
+
+    addUserDialog.afterClosed().subscribe(() => {
+      this.fetchUsers();
+    });
+  }
+
+  editUserDialog(user: any) {
+    const addUserDialog = this.dialog.open(AddUserDialogComponent, {
+      data: user,
       hasBackdrop: true,
       disableClose: true,
       height: '1136px',
@@ -119,7 +132,27 @@ export class ManagementPageComponent implements OnInit {
   }
 
   onEdit(userId: number) {
-    //TODO: add onEdit
+    this.userService.getUserById(userId).subscribe(
+      (res) => {
+        const user = {
+          firstName: res.firstName,
+          lastName: res.lastName,
+          email: res.email,
+          password: res.password,
+          role: res.role,
+          address: res.userDetail?.address,
+          phoneNumber: res.userDetail?.phoneNumber,
+          birthday: res.userDetail?.birthday,
+          title: res.userDetail?.title,
+          manager: res.userDetail?.manager,
+          team: res.userDetail?.team,
+        };
+        this.editUserDialog(user);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 
   fetchUsers() {

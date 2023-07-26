@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Dialog } from '@angular/cdk/dialog';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialogModule,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, NgForm } from '@angular/forms';
-import { UserService } from 'src/app/services/user/user.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
@@ -17,8 +19,39 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 export class AddUserDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<AddUserDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private authService: AuthService
   ) {}
+
+  user = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    role: '',
+    address: '',
+    phoneNumber: '',
+    birthday: '',
+    title: '',
+    manager: '',
+    team: '',
+  };
+
+  ngOnInit() {
+    this.user = {
+      firstName: this.data.firstName,
+      lastName: this.data.lastName,
+      email: this.data.email,
+      password: this.data.password,
+      role: this.data.role,
+      address: this.data.address,
+      phoneNumber: this.data.phoneNumber,
+      birthday: this.data.birthday,
+      title: this.data.title,
+      manager: this.data.manager,
+      team: this.data.team,
+    };
+  }
 
   onSubmit(form: NgForm) {
     console.log(form.value);
