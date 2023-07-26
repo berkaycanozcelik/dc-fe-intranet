@@ -72,6 +72,7 @@ export class ManagementPageComponent implements OnInit {
   }
   openUserDialog() {
     const addUserDialog = this.dialog.open(AddUserDialogComponent, {
+      hasBackdrop: true,
       disableClose: true,
       height: '1136px',
       width: '500px',
