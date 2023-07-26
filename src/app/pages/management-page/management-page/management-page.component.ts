@@ -135,6 +135,7 @@ export class ManagementPageComponent implements OnInit {
     this.userService.getUserById(userId).subscribe(
       (res) => {
         const user = {
+          id: res.id,
           firstName: res.firstName,
           lastName: res.lastName,
           email: res.email,
