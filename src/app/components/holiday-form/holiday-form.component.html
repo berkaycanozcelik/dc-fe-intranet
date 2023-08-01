@@ -1,10 +1,14 @@
-<form class="holiday-request-form pt-5" #holidayForm="ngForm" (ngSubmit)="submitForm(holidayForm)">
+<form
+  class="holiday-request-form pt-5"
+  #holidayForm="ngForm"
+  (ngSubmit)="submitForm(holidayForm)"
+>
   <div class="form-group">
     <label for="start-date">Start Date</label>
     <input
       type="date"
       id="start-date"
-      name="start-date"
+      name="startDate"
       class="form-control"
       required
       [(ngModel)]="startDate"
@@ -15,7 +19,7 @@
     <input
       type="date"
       id="end-date"
-      name="end-date"
+      name="endDate"
       class="form-control"
       required
       [(ngModel)]="endDate"
@@ -27,7 +31,7 @@
     <input
       type="number"
       id="vacation-workdays"
-      name="vacation-workdays"
+      name="vacationWorkdays"
       class="form-control"
       required
       [(ngModel)]="vacationWorkdays"
@@ -37,7 +41,7 @@
     <label for="reason">Notiz</label>
     <textarea
       id="notiz"
-      name="notiz"
+      name="reason"
       class="form-control"
       rows="4"
       required
@@ -50,7 +54,7 @@
         <input
           type="checkbox"
           id="confirmation-1"
-          name="confirmation-1"
+          name="confirmation1"
           required
           [(ngModel)]="confirmation1"
         />
@@ -67,7 +71,7 @@
         <input
           type="checkbox"
           id="confirmation-2"
-          name="confirmation-2"
+          name="confirmation2"
           required
           [(ngModel)]="confirmation2"
         />
