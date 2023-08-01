@@ -9,15 +9,18 @@ import { AuthResponseData } from '../auth/auth.service';
 })
 export class HolidayService {
   private baseUrl: string = 'http://localhost:8080/api/holidays';
+  private baseUrlForUser: string = 'http://localhost:8080/api/users/holidays';
 
   constructor(private http: HttpClient) {}
 
-  saveHoliday(holiday: Holiday): Observable<Holiday> {
-    return this.http.post<Holiday>(this.baseUrl, holiday);
+  saveHoliday(id: number, holiday: Holiday): Observable<Holiday> {
+    const url = `${this.baseUrlForUser}?userId=${id}`;
+    return this.http.post<Holiday>(url, holiday);
   }
 
-  getHolidays(): Observable<Holiday[]> {
-    return this.http.get<Holiday[]>(this.baseUrl);
+  getHolidays(id: number): Observable<Holiday[]> {
+    const url = `${this.baseUrlForUser}?userId=${id}`;
+    return this.http.get<Holiday[]>(url);
   }
 
   updateHoliday(holiday: Holiday, id: number): Observable<Holiday> {
