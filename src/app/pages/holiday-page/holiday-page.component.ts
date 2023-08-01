@@ -28,6 +28,7 @@ export class HolidayPageComponent {
   editHoliday!: Holiday;
   isEdit: boolean = false;
   selectedTabIndex: number = 0;
+  userId!: number;
 
   onHolidaysChange(holiday: Holiday) {
     if (this.isEdit) {
@@ -57,7 +58,16 @@ export class HolidayPageComponent {
   }
 
   ngOnInit(): void {
-    this.holidayService.getHolidays().subscribe((h) => {
+    const data = sessionStorage.getItem('data');
+
+    if (data) {
+      let user = JSON.parse(data);
+
+      this.userId = user.id;
+    }
+
+
+    this.holidayService.getHolidays(this.userId).subscribe((h) => {
       return (this.holidays = h);
     });
   }

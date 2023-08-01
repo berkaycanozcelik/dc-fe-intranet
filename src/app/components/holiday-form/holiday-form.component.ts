@@ -43,6 +43,8 @@ export class HolidayFormComponent implements OnInit {
   @Input() editHoliday!: Holiday;
   @Input() isEditMode: boolean = false;
 
+  userID!: number;
+
   startDate: string = '';
   endDate: string = '';
   vacationWorkdays: number = 0;
@@ -50,7 +52,7 @@ export class HolidayFormComponent implements OnInit {
   confirmation1: boolean = false;
   confirmation2: boolean = false;
   replacement: string = '';
-  status: string = 'Pending';
+  status: string = 'PENDING';
 
   ngOnInit() {
     if (this.isEditMode) {
@@ -63,13 +65,21 @@ export class HolidayFormComponent implements OnInit {
       this.replacement = this.editHoliday.replacement;
       this.status = this.editHoliday.status;
     }
+
+    const data = sessionStorage.getItem('data');
+
+    if (data) {
+      let user = JSON.parse(data);
+
+      this.userID = user.id;
+    }
   }
 
   submitForm(form: NgForm) {
     if (!this.isEditMode) {
-      this.holidayService.saveHoliday(form.value).subscribe(
+      form.value.status = 'PENDING';
+      this.holidayService.saveHoliday(this.userID, form.value).subscribe(
         (response) => {
-          console.log('Sucessfully saved holiday: ' + response);
           form.reset();
         },
         (error) => {
